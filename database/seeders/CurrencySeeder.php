@@ -21,26 +21,26 @@ class CurrencySeeder extends Seeder
                 [
                     'name' => 'bitcoin',
                     'slug' => 'BTC',
-                    'price' => 1,
+                    'price' => 0,
                     "created_at" => Carbon::now(), "updated_at" => now()
                 ],
                 [
                     'name' => 'tether',
                     'slug' => 'USDT',
-                    'price' => 1,
+                    'price' => 0,
                     "created_at" => Carbon::now(), "updated_at" => now()
                 ],
                 [
                     'name' => 'ethereum',
                     'slug' => 'ETH',
-                    'price' => 1,
+                    'price' => 0,
                     "created_at" => Carbon::now(), "updated_at" => now()
 
                 ],
                 [
                     'name' => 'shiba-inu',
                     'slug' => 'SHIB',
-                    'price' => 1,
+                    'price' => 0,
                     "created_at" => Carbon::now(), "updated_at" => now()
                 ],
             ]
