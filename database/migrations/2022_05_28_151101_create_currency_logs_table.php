@@ -15,7 +15,7 @@ class CreateCurrencyLogsTable extends Migration
     {
         Schema::create('currency_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('currency_id')->constrained();
+            $table->foreignId('currency_id')->constrained()->onDelete('cascade');
             $table->double('price', 15, 8)->default(0);
 
             $table->timestamps();

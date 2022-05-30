@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CurrencyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+Route::name('currency.')->group(function () {
+    Route::get('/currency', [CurrencyController::class, 'index'])->name('index');
+    Route::get('/currency/{id}', [CurrencyController::class, 'show'])->name('show');
+    Route::post('/currency', [CurrencyController::class, 'store'])->name('store');
+    Route::put('/currency/{id}', [CurrencyController::class, 'update'])->name('update');
+    Route::delete('/currency/{id}', [CurrencyController::class, 'destroy'])->name('delete');
+
+});
+
+Route::get('/remote-fetch', [CurrencyController::class, 'remoteFetch'])->name('remote_fetch');

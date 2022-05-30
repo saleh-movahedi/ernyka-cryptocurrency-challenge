@@ -12,7 +12,7 @@ class Currency extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'price'];
+    protected $fillable = ['name', 'slug', 'price'];
 
     public function currencyLog(): \Illuminate\Database\Eloquent\Relations\HasMany
     {

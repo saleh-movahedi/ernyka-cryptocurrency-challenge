@@ -5,6 +5,7 @@ namespace App\Repository\Eloquent;
 
 use App\Models\Currency;
 use App\Repository\CurrencyRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 
 class CurrencyRepository extends BaseRepository implements CurrencyRepositoryInterface
@@ -52,5 +53,20 @@ class CurrencyRepository extends BaseRepository implements CurrencyRepositoryInt
     public function UpdateCurrencyPrice($currencyItem, $price)
     {
         $currencyItem->update(['price' => $price]);
+    }
+
+    public function find($id): ?Model
+    {
+        return $this->model->newQuery()->find($id, ['id', 'name', 'slug', 'price']);
+    }
+
+    public function update($id, $data)
+    {
+        return $this->model->newQuery()->find($id)->update($data);
+    }
+
+    public function delete($id)
+    {
+        return $this->model->newQuery()->findOrFail($id)->delete();
     }
 }

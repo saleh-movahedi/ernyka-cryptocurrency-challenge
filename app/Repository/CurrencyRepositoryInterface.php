@@ -12,4 +12,5 @@ interface CurrencyRepositoryInterface extends EloquentRepositoryInterface
 {
 
     public function all();
+    public function find($id): ?Model;
 }

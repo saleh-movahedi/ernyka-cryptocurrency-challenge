@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Currency;
+use App\Services\CurrencyService;
 
 class CurrencyObserver
 {
@@ -14,7 +15,7 @@ class CurrencyObserver
      */
     public function created(Currency $currency)
     {
-        //
+        resolve(CurrencyService::class)->fetchPricesFromThirdParty();
     }
 
     /**
