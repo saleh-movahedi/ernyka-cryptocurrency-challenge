@@ -18,7 +18,6 @@ class CreateCurrenciesTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->double('price', 15, 8)->default(0);
-            // $table->enum('status', ['ordered', 'in-progress', 'done']);
             $table->boolean('status')->default(true);
 
             $table->timestamps();

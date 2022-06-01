@@ -3,8 +3,11 @@
 namespace App\Services;
 
 use App\Jobs\CurrencyPriceFetchServiceJob;
+use App\Models\Currency;
+use App\Models\Ratio;
 use App\Repository\CurrencyRepositoryInterface;
 use App\Repository\Eloquent\CurrencyRepository;
+use App\Repository\RatioRepositoryInterface;
 use Codenixsv\CoinGeckoApi\CoinGeckoClient;
 use Illuminate\Support\Facades\Log;
 
@@ -14,18 +17,24 @@ class CurrencyService
      * @var CurrencyRepository
      */
     private $currencyRepository;
+    /**
+     * @var RatioRepositoryInterface
+     */
+    private $ratioRepository;
 
-    public function __construct(CurrencyRepositoryInterface $currencyRepository)
+    public function __construct(
+        CurrencyRepositoryInterface $currencyRepository,
+        RatioRepositoryInterface $ratioRepository
+    )
     {
         $this->currencyRepository = $currencyRepository;
+        $this->ratioRepository = $ratioRepository;
     }
 
 
     public function fetchPricesFromThirdParty()
     {
-        $currencies = $this->currencyRepository->getAllCurrencies();
-        $currencies = implode(',', $currencies);
-        CurrencyPriceFetchServiceJob::dispatch($currencies);
+        CurrencyPriceFetchServiceJob::dispatch(/*$currencies*/);
     }
 
 
@@ -38,9 +47,19 @@ class CurrencyService
     public function saveCurrencies($priceList)
     {
         $currencies = $this->currencyRepository->getCurrenciesByName(array_keys($priceList));
+        $ratios = $this->ratioRepository->all();
 
+        /** @var Currency $currencyItem */
         foreach ($currencies as $currencyItem) {
-            $this->currencyRepository->UpdateCurrencyPrice($currencyItem, $priceList[$currencyItem->name]/*+rand(1000, 2000)*/);
+            $this->currencyRepository->UpdateCurrencyPrice($currencyItem, $priceList[$currencyItem->name]);
+        }
+
+        // calculating ratio between currency pairs
+        foreach ($ratios as $ratioItem) {
+            $newRationValue =
+                $currencies->where('id', $ratioItem->currency_a_id)->first()->price /
+                $currencies->where('id', $ratioItem->currency_b_id)->first()->price;
+            $ratioItem->update(['value' => $newRationValue]);
         }
 
         Log::info(['after update database' => $currencies->toArray()]);

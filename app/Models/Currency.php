@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property mixed $price
+ * @property string $name
  */
 class Currency extends Model
 {

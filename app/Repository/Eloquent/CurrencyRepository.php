@@ -50,9 +50,15 @@ class CurrencyRepository extends BaseRepository implements CurrencyRepositoryInt
             ->get();
     }
 
-    public function UpdateCurrencyPrice($currencyItem, $price)
+    /**
+     * @param Currency $currencyItem
+     * @param $price
+     * @return void
+     */
+    public function UpdateCurrencyPrice(Currency $currencyItem, $price)
     {
         $currencyItem->update(['price' => $price]);
+        $currencyItem->currencyLog()->newQuery()->create(['price' => $price]);
     }
 
     public function find($id): ?Model

@@ -26,7 +26,6 @@ class CurrencyObserver
      */
     public function updated(Currency $currency)
     {
-        $currency->currencyLog()->newQuery()->create(['price' => $currency->price]);
     }
 
     /**

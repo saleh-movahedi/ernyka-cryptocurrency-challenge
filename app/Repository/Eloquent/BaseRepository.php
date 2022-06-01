@@ -41,4 +41,14 @@ class BaseRepository implements EloquentRepositoryInterface
     {
         return $this->model->find($id);
     }
+
+    public function update($id, $data)
+    {
+        return $this->model->newQuery()->findOrFail($id)->update($data);
+    }
+
+    public function delete($id)
+    {
+        return $this->model->newQuery()->findOrFail($id)->delete();
+    }
 }
