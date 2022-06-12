@@ -29,25 +29,25 @@ class RatioSeeder extends Seeder
                 [
                     'currency_a_id' => $coins['tether']->id,
                     'currency_b_id' => $coins['bitcoin']->id,
-                    'title' => "{$coins['tether']->slug}/{$coins['bitcoin']->slug}",
+                    'title' => "{$coins['tether']->slug}-{$coins['bitcoin']->slug}",
                     "created_at" => Carbon::now(), "updated_at" => now()
                 ],
                 [
                     'currency_a_id' => $coins['tether']->id,
                     'currency_b_id' => $coins['shiba-inu']->id,
-                    'title' => "{$coins['tether']->slug}/{$coins['shiba-inu']->slug}",
+                    'title' => "{$coins['tether']->slug}-{$coins['shiba-inu']->slug}",
                     "created_at" => Carbon::now(), "updated_at" => now()
                 ],
                 [
                     'currency_a_id' => $coins['tether']->id,
                     'currency_b_id' => $coins['ethereum']->id,
-                    'title' => "{$coins['tether']->slug}/{$coins['ethereum']->slug}",
+                    'title' => "{$coins['tether']->slug}-{$coins['ethereum']->slug}",
                     "created_at" => Carbon::now(), "updated_at" => now()
                 ],
                 [
                     'currency_a_id' => $coins['bitcoin']->id,
                     'currency_b_id' => $coins['ethereum']->id,
-                    'title' => "{$coins['bitcoin']->slug}/{$coins['ethereum']->slug}",
+                    'title' => "{$coins['bitcoin']->slug}-{$coins['ethereum']->slug}",
                     "created_at" => Carbon::now(), "updated_at" => now()
                 ],
             ]
