@@ -61,8 +61,6 @@ class CurrencyService
                 $currencies->where('id', $ratioItem->currency_b_id)->first()->price;
             $ratioItem->update(['value' => $newRationValue]);
         }
-
-        Log::info(['after update database' => $currencies->toArray()]);
     }
 
 
