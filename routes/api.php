@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\CurrencyController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\RatioController;
+use App\Http\Controllers\WalletController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,4 +32,11 @@ Route::name('currency.')->group(function () {
 
 });
 
+Route::get('/wallet', [WalletController::class, 'index'])->name('wallet.index');
+
+Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+//Route::post('/order/buy', [OrderController::class, 'buy'])->name('order.buy');
+
 Route::get('/remote-fetch', [CurrencyController::class, 'remoteFetch'])->name('remote_fetch');
+
+Route::get('/ratio', [RatioController::class, 'index'])->name('ratio.index');

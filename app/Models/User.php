@@ -8,6 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @property mixed $id
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -42,7 +45,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function wallet(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function wallet($currency)
+    {
+        dd('$currency: ', $currency);
+
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function wallets(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(Wallet::class);
     }
